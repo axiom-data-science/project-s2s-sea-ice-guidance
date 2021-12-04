@@ -6,16 +6,16 @@ import geopandas as gdp
 import matplotlib.pyplot as plt
 import pandas as pd
 import xarray as xr
-from pandas.plotting import register_matplotlib_converters
-from statsmodels.tsa.seasonal import STL 
-from dask.distributed import Client, progress
 from dask import delayed
+from dask.distributed import Client, progress
+from pandas.plotting import register_matplotlib_converters
+from statsmodels.tsa.seasonal import STL
 
 register_matplotlib_converters()
 
 
 
-locs = pd.read_csv("/data/assets/s2s/data/ak-ice-locs.csv")
+locs = pd.read_csv("/data/assets/s2s/data/ak_ice_locs.csv")
 # convert from -180, 180 -> 0, 360
 locs.lon = (locs.lon + 360) % 360
 
@@ -29,7 +29,7 @@ var_map = {
         'ice_conc': 'ICE_C_GDS0_SFC_ave6h'
     },
     'sst': {
-        'atm_temp': 'POT_GDS0_DBSL_ave6h'
+        'sst': 'POT_GDS0_DBSL_ave6h'
     }
 }
 
@@ -52,7 +52,7 @@ files = {
     'sst': sst_files
 }
 
-client = Client('estuaries04.ib.axiomptk:9000')
+client = Client('estuaries01.ib.axiomptk:7030')
 
 # Anywhere from 100 to 250 ms to extract a single time step from a file.
 def get_station(fname, var='temp', coords=(-160.05500, 70.6870), var_map=var_map):
@@ -96,7 +96,7 @@ for row in locs.itertuples():
         (ocn_files, 'temp'),
         (ocn_files, 'salt'),
         (ocn_files, 'ice_thk'),
-        (sst_files, 'atm_temp')
+        (sst_files, 'sst')
     ]
     for fv in files_vars:
         files, var = fv
