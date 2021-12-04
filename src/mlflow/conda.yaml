@@ -1,0 +1,11 @@
+name: s2s-model
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+    - mlflow
+    - statsmodels==0.11.1
+    - scikit-learn==0.22.1
+    - prophet>=1.0.1
