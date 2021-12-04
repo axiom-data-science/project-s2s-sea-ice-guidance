@@ -3,10 +3,22 @@ import pandas as pd
 import xarray as xr
 from prophet import serialize
 
-variables = {
-    'ice': 'ICE_C_GDS0_SFC_ave6h',
 
-}
+def load_station(station_dir, station, resample='W'):
+    variables = {
+        'ice': 'ICE_C_GDS0_SFC_ave6h',
+        'sst': 'POT_GDS0_DBSL_ave6h', 
+    }
+    files = {
+        'ice': station_dir / f'{station}-ice_conc.nc',
+        'sst': station_dir / f'{station}-sst.nc'
+    }
+    df = load_station_var(files['ice'], variables['ice'], resample)
+    sst_df = load_station_var(files['sst'], variables['sst'], resample)
+    df['sst'] = sst_df.y
+
+    return df
+
 
 def load_station_var(fname, var, resample='W'):
     with xr.open_dataset(fname) as ds:
