@@ -1,0 +1,5 @@
+outs:
+- md5: 4c0c2657d9815779a39740ceb992cd0b.dir
+  size: 63087294
+  nfiles: 1545
+  path: station-data
