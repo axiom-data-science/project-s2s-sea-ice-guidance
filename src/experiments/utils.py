@@ -51,5 +51,7 @@ def _prep_df_for_prophet(df, var):
     )
 
 
-def extract_params(pr_model):
+def extract_model_params(pr_model):
     return {attr: getattr(pr_model, attr) for attr in serialize.SIMPLE_ATTRIBUTES}
+
+

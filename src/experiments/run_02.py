@@ -1,3 +1,4 @@
+"""Model B from `evaluate-prophet.ipynb`"""
 from pathlib import Path
 
 import mlflow
@@ -12,10 +13,9 @@ station_files = list(Path(STATION_FILE_DIR).glob('*ice_conc.nc'))
 # <station>-<var>.nc
 station_names =[station_file.name.split('.')[0].split('-')[0] for station_file in station_files]
 
-fname = station_files[0]
-station_ice = utils.load_station_var(fname, utils.variables['ice'])
-# <station>-<var>.nc
-station_name = station_names[0]
+fname = Path(STATION_FILE_DIR) / 'PABRC-ice_conc.nc' 
+station_ice = utils.load_station_var(fname, utils.variables['ice'], resample='W')
+station_name = 'PABRC'
 
 # Prep MLflow
 TRACKING_URI = 'http://mlflow.srv.axiomptk:80'
@@ -43,7 +43,15 @@ with mlflow.start_run(run_name=script_name) as active_run:
         }
     )
 
-    model = Prophet().fit(station_ice)
+    model = Prophet(
+        growth='linear',
+        yearly_seasonality=True,
+        weekly_seasonality=False,
+        daily_seasonality=False,
+        holidays=None,
+        seasonality_mode='additive'
+    )
+    model.fit(station_ice)
     params = utils.extract_model_params(model)
 
     metric_keys = ["mse", "rmse", "mae", "mape", "mdape", "smape", "coverage"]
