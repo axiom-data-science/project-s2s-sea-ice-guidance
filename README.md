@@ -55,3 +55,12 @@ The goal of the project is to develop models that can predict sea ice at a given
   - dvc: true 
 
 ## Models
+
+Original models devleoped in notebook in `evaluate-prophet.ipynb` to evaluate Prophet and feasibility
+of developing an S2S model trained on station data `data/station-data` which is saved in dvc with git tag "v1.0".
+
+The models and training details were then persisted in [MLFlow](http://mlflow.srv.axiomptk/#/experiments/1).
+
+The models can be retrained, or new models can be evaulated, using the `runner.py` which takes the path to a Prophet
+model (e.g. `explortatory/model_01.py`), a station (e.g. PABRC), and an experiment name (e.g. S2S_prophet).  The
+script will load the model, train it on the extracted station data, and log the model skill and plots in mlflow.

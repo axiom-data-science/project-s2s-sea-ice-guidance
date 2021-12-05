@@ -1,0 +1,7 @@
+version: 2
+
+station_file_path: /mnt/store/data/assets/s2s/data/station-data
+tracking_uri: http://mlflow.srv.axiomptk:80
+artifact_path: /mnt/store/data/assets/s2s/models/training 
+git_tag: v1.0
+mlflow_s3_endpoint_url: http://mlflow-minio-api.srv.axiomptk
