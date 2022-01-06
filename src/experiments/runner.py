@@ -7,13 +7,13 @@ from pathlib import Path
 
 import click
 import matplotlib.pyplot as plt
-import utils
+import mlflow
 from dask import distributed
 from prophet import plot
 from prophet.diagnostics import cross_validation, performance_metrics
 from prophet.serialize import model_to_json
 
-import mlflow
+import utils
 
 config = utils.read_config()
 # Client needs to this set (along with S3 creds if perms required)
@@ -28,7 +28,7 @@ def __load_model(model):
     """Given path to model, return loaded Prophet model."""
     # boilerplate: https://docs.python.org/3/library/importlib.html
     model_name = model.name.split('.')[0]
-    spec = importlib.util.spec_from_file_location(model_name, model) 
+    spec = importlib.util.spec_from_file_location(model_name, model)
     model_module = importlib.util.module_from_spec(spec)
     sys.modules['model_module'] = model_module
     spec.loader.exec_module(model_module)
