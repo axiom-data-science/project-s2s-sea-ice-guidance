@@ -1,4 +1,4 @@
-# S2S - Probabilisitc Sea Ice Guidance
+# S2S - Probabilistic Sea Ice Guidance
 
 ## Summary
 
