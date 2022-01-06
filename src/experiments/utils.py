@@ -342,7 +342,7 @@ def read_config():
 def load_station(station_dir, station, resample='W'):
     variables = {
         'ice': 'ICE_C_GDS0_SFC_ave6h',
-        'sst': 'POT_GDS0_DBSL_ave6h', 
+        'sst': 'POT_GDS0_DBSL_ave6h',
     }
     files = {
         'ice': station_dir / f'{station}-ice_conc.nc',

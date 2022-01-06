@@ -7,13 +7,13 @@ from pathlib import Path
 
 import click
 import matplotlib.pyplot as plt
-import mlflow
+import utils
 from dask import distributed
 from prophet import plot
 from prophet.diagnostics import cross_validation, performance_metrics
 from prophet.serialize import model_to_json
 
-import utils
+import mlflow
 
 config = utils.read_config()
 # Client needs to this set (along with S3 creds if perms required)
