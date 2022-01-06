@@ -323,6 +323,7 @@ STATIONS = [
     'N55W171'
 ]
 
+
 def read_config():
     try:
         config_file = os.environ['MLFLOW_CONFIG']
@@ -336,6 +337,7 @@ def read_config():
         raise Exception(f'Unable to location experiment config.  Set env var MLFLOW_CONFIG')
 
     return config
+
 
 def load_station(station_dir, station, resample='W'):
     variables = {
