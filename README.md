@@ -1,66 +1,42 @@
 # S2S - Probabilistic Sea Ice Guidance
 
-## Summary
+## Project Summary
 
-The goal of the project is to develop models that can predict sea ice at a given set of locations from
-3 weeks to 6 months in advance trained on CFSv2 with the CPC experimental coupled ice model.
+This repo is an archive of code, data, models, and notebooks for the [S2S - Proababilistic Sea Ice Guidance Project](http://stage-s2s.srv.axiomptk).
 
-## Project links
+The goal of the project was to develop a method to provide week 3 to seasonal (S2S) sea ice guidance for predefined locations based on historical output from the operational NCEP Climate Forecast System Version 2 (CFSv2) coupled with an experimental sea ice model (CPC).
 
-[Jira](https://axds.atlassian.net/jira/software/projects/S2S/boards/69)
-[Confluence](https://axds.atlassian.net/wiki/spaces/LEM/pages/846200880/S2S+Probabilistic+Sea+Ice+Guidance)
+### Training data
 
-## Data 
+Historical model results for sea ice concentration and air temperature were ingested from the model for the years 2012 to 2020 to provide the basis of the sea ice guidance model development. Time series of model results at 315 points of interest identified by NWS were extracted from the model and saved to netCDF files.
 
-### Raw
+### Model development
 
-1. CFSv2 with experimental CPC ice model
-  - Contact: Wanqiu Wang (NOAA/NWS/NCEP), wanqiu.wang@noaa.gov
-  - Delivery: Uploaded via ftp to backup1
-  - Path: /mnt/store/data/assets/s2s/data/45day
-  - Format: grib
-  - Description:
-    - `ocn` - Ocean fields from 2019 - 2020
-    - `sic` - Sea ice from 2012 - 2020
-    - `sst` - Sea surface temperature from 2012 - 2020
-    - Daily files extracted from 45 day forecasts
+The extracted station based time series signals were then used to train a regression based model to provide daily sea ice concentration forecasts for the next year.
 
-2. CFSv2 with experimental CPC ice model
-  - Contact: Wanqiu Wang (NOAA/NWS/NCEP), wanqiu.wang@noaa.gov
-  - Delivery: Uploaded via ftp to backup1
-  - Path: /mnt/store/data/assets/s2s/data/seasonal
-  - Format: grib
-  - Description:
-    - Daily files extracted from seasonal forecasts
-    - Data not used in the project
+### Model assessment
 
-3. Stations of interest
-  - Contact: Eugene Petrescu (NOAA/NWS), eugene.m.petrescu@noaa.gov
-  - Delivery: Emailed
-  - Path: /mnt/store/data/assets/s2s/data/ak_ice_locs.csv
-  - Format: csv
-  - Desription:
-    - List of stations where model predictions would be useful
+The sea ice concentration RMSE over every station derived from a cross-validation horizon of 365 days based on 8 years of training data had a mean value of 0.138, a minimum of 0.008, and a maximum of 0.434. The station with the highest average RMSE (N73W145) had an average RMSE of 0.26. Generally, the highest error correspond to a difference in phase between ice growth and retreat and that predicted by the model.
 
-### Processed
+## Repo Content
 
-1. Extracted CFS data at station locations from
-  - Contact: Jesse
-  - Process:
-    - Extract stations:
-      - Run `make-nc`
-        - Path: /mnt/store/data/assets/s2s/src/data-preprocessing-scripts/make-nc.py
-        - Environment: Used S2S from `dask-cluster` repo as environment and for Dask
-  - Path: /mnt/store/data/assets/s2s/data/station-data
-  - dvc: true 
+### Data 
+
+`ak-ice-locs.csv` conatiners the locations of stations from which training data was extracted from CFS and models were trianed.
+
+The directory `station-data` includes the data extracted from CFS at the locations defined in `data/ak-ice-locs.csv`.
+
+### Notebooks
+
+`evalute-prophet.ipynb` contains code from the evaulation and evolution of `prophet` based models.
+
+`make-prophet-station-models.ipynb` contains code from the creation of `prophet` based models for each station.
+
+### Code (`src`)
+
+`src/make-nc.py` extracts the data at the locations defined in `ak-ice-locs.csv` from the model output and saves as station netCDF files.
+`src/experiements` contains code for the evaluation of various model configurations for the `prophet` include integration with an internal `MLflow` instance.
 
 ## Models
 
-Original models devleoped in notebook in `evaluate-prophet.ipynb` to evaluate Prophet and feasibility
-of developing an S2S model trained on station data `data/station-data` which is saved in dvc with git tag "v1.0".
-
-The models and training details were then persisted in [MLFlow](http://mlflow.srv.axiomptk/#/experiments/1).
-
-The models can be retrained, or new models can be evaulated, using the `runner.py` which takes the path to a Prophet
-model (e.g. `explortatory/model_01.py`), a station (e.g. PABRC), and an experiment name (e.g. S2S_prophet).  The
-script will load the model, train it on the extracted station data, and log the model skill and plots in mlflow.
+`station-models` contains the `prophet` models trained for each station which can be loaded and used for predictions.
