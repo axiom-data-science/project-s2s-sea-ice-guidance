@@ -16,7 +16,7 @@ The extracted station based time series signals were then used to train a regres
 
 ### Model assessment
 
-The sea ice concentration RMSE over every station derived from a cross-validation horizon of 365 days based on 8 years of training data had a mean value of 0.138, a minimum of 0.008, and a maximum of 0.434. The station with the highest average RMSE (N73W145) had an average RMSE of 0.26. Generally, the highest error correspond to a difference in phase between ice growth and retreat and that predicted by the model.  Skill metrics for individual stations are saved in `station-models` in text files on a per station file.
+The sea ice concentration RMSE over every station derived from a cross-validation horizon of 365 days based on 8 years of training data had a mean value of 0.138, a minimum of 0.008, and a maximum of 0.434. The station with the highest average RMSE (N73W145) had an average RMSE of 0.26. Generally, the highest error correspond to a difference in phase between ice growth and retreat and that predicted by the model.  Skill metrics for individual stations are saved in `station-models` in text files on a per station file and in a compiled text file `data/station-skill.txt`.
 
 ## Repo Content
 
@@ -25,6 +25,10 @@ The sea ice concentration RMSE over every station derived from a cross-validatio
 `ak-ice-locs.csv` conatiners the locations of stations from which training data was extracted from CFS and models were trianed.
 
 The directory `station-data` includes the data extracted from CFS at the locations defined in `data/ak-ice-locs.csv`.
+
+A summary table of model RMSE per station is saved in `data/station-skill.txt`.
+
+A browesable Bokeh map of the stations and model skill is available in `data/station-map-rmse-mean.html`.
 
 ### Notebooks
 
@@ -39,4 +43,4 @@ The directory `station-data` includes the data extracted from CFS at the locatio
 
 ### Models
 
-`station-models` contains the `prophet` models trained for each station which can be loaded and used for predictions.  Skill scores for each station are saved in text files on a per station basis.
+`station-models` contains the `prophet` models trained for each station which can be loaded and used for predictions.  Skill scores for each station are saved in text files on a per station basis and a summary table of model RMSE is available in `data/station-skill.txt`.
