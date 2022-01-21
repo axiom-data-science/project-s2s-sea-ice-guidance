@@ -16,7 +16,7 @@ The extracted station based time series signals were then used to train a regres
 
 ### Model assessment
 
-The sea ice concentration RMSE over every station derived from a cross-validation horizon of 365 days based on 8 years of training data had a mean value of 0.138, a minimum of 0.008, and a maximum of 0.434. The station with the highest average RMSE (N73W145) had an average RMSE of 0.26. Generally, the highest error correspond to a difference in phase between ice growth and retreat and that predicted by the model.
+The sea ice concentration RMSE over every station derived from a cross-validation horizon of 365 days based on 8 years of training data had a mean value of 0.138, a minimum of 0.008, and a maximum of 0.434. The station with the highest average RMSE (N73W145) had an average RMSE of 0.26. Generally, the highest error correspond to a difference in phase between ice growth and retreat and that predicted by the model.  Skill metrics for individual stations are saved in `station-models` in text files on a per station file.
 
 ## Repo Content
 
@@ -37,6 +37,6 @@ The directory `station-data` includes the data extracted from CFS at the locatio
 `src/make-nc.py` extracts the data at the locations defined in `ak-ice-locs.csv` from the model output and saves as station netCDF files.
 `src/experiements` contains code for the evaluation of various model configurations for the `prophet` include integration with an internal `MLflow` instance.
 
-## Models
+### Models
 
-`station-models` contains the `prophet` models trained for each station which can be loaded and used for predictions.
+`station-models` contains the `prophet` models trained for each station which can be loaded and used for predictions.  Skill scores for each station are saved in text files on a per station basis.
