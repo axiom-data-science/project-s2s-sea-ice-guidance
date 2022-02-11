@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-This repo is an archive of code, data, models, and notebooks for the [S2S - Proababilistic Sea Ice Guidance Project](https://s2s.srv.axiomptk).
+This repo is an archive of code, data, models, and notebooks for the [S2S - Proababilistic Sea Ice Guidance Project](https://s2s.srv.axds.co).
 
 The goal of the project was to develop a method to provide week 3 to seasonal (S2S) sea ice guidance for predefined locations based on historical output from the operational NCEP Climate Forecast System Version 2 (CFSv2) coupled with an experimental sea ice model (CPC).
 
