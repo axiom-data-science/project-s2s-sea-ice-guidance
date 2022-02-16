@@ -18,7 +18,7 @@
     "related_identifiers": [
         {
             "scheme": "url", 
-            "identifier": "https://github.com/axiom-data-science/project-s2s-sea-ice-guidance/tree/v1.1", 
+            "identifier": "https://github.com/axiom-data-science/project-s2s-sea-ice-guidance/tree/v1.0", 
             "relation": "isSupplementTo"
         }, 
         {
