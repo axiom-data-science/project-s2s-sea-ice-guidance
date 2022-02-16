@@ -1,5 +1,7 @@
 # S2S - Probabilistic Sea Ice Guidance
 
+[![DOI](https://zenodo.org/badge/446922170.svg)](https://zenodo.org/badge/latestdoi/446922170)
+
 ## Project Summary
 
 This repo is an archive of code, data, models, and notebooks for the [S2S - Probabilistic Sea Ice Guidance Project](https://s2s.srv.axds.co).
