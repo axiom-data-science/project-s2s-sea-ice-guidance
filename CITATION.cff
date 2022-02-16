@@ -1,0 +1,11 @@
+cff-version: 1.1.0
+message: "Please cite this repository as:"
+authors:
+  - family-names: Lopez
+    given-names: Jesse
+    orcid: https://orcid.org/0000-0002-6450-6209
+  - family-names: Koeppen
+    given-names: Will
+title: axiom-data-science/project-s2s-sea-ice-guidance: v1.1 (v1.1).
+version: v1.1
+date-released: 2022-02-16
