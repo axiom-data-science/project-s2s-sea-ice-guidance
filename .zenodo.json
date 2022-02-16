@@ -1,8 +1,7 @@
 {
-    "description": "<p><strong>Full Changelog</strong>: <a href=\"https://github.com/axiom-data-science/project-s2s-sea-ice-guidance/commits/v1.1\">https://github.com/axiom-data-science/project-s2s-sea-ice-guidance/commits/v1.1</a></p>", 
+    "description": "<p><strong>Full Changelog</strong>: <a href=\"https://github.com/axiom-data-science/project-s2s-sea-ice-guidance/commits/\">https://github.com/axiom-data-science/project-s2s-sea-ice-guidance/commits/</a></p>", 
     "license": "other-open", 
-    "title": "axiom-data-science/project-s2s-sea-ice-guidance: v.1.2", 
-    "version": "v1.2", 
+    "title": "axiom-data-science/project-s2s-sea-ice-guidance", 
     "upload_type": "software", 
     "publication_date": "2022-02-16", 
     "creators": [
